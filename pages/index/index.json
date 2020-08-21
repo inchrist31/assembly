@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "i-tabs": "../../../vendors/iviewui-dist/tabs/index",
+    "i-tab": "../../../vendors/iviewui-dist/tab/index"
+  }
+}

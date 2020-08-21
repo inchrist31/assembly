@@ -1,0 +1,29 @@
+<navigation id='Navigation' show-home-icon='{{showHomeIcon}}' show-back-icon='{{showBacKIcon}}' title="输入">
+</navigation>
+
+<view class="page">
+  <block wx:if="{{type && articleId}}">
+  <view class="page__bd">
+
+    <view class="weui-cells__title">
+    <view class="button-sp-area" style="display:flex;width:100%;justify-content:space-between;">
+      <view>
+        <button class="weui-btn mini-btn" type="default" size="mini" bindtap="cancel">取消</button>
+      </view>
+      <view>
+        <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="submit">确定</button>
+      </view>
+    </view>
+    </view>
+    
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="请输入文本" style="height:{{inputHeight}}em"  maxlength="200" bindinput="bindInput" value="{{inputText}}" />
+          <view class="weui-textarea-counter">{{inputTextLength}}/200</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  </block>
+</view>

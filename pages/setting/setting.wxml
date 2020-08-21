@@ -1,0 +1,37 @@
+<navigation
+id='Navigation'
+title="设置"
+>
+</navigation>
+
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">亲爱的 {{userInfo.nickName}}</view>
+    <view class="page__desc">您是群 <open-data type="groupName" open-gid="{{curGroup._id}}" /> 的管理员，请谨慎操作！</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-cells__title"></view>
+    
+      <view class="weui-cells weui-cells_after-title">
+        <navigator url="./members/members" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__bd">成员管理</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{item.desc}}</view>
+        </navigator>
+      <!-- <navigator url="./notice/notice" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+          <view class="weui-cell__bd">发送通知</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">{{item.desc}}</view>
+        </navigator>--> 
+        <view class="weui-cell" catchtap="finishGroup">
+                <view class="weui-cell__bd">解散本群</view>
+                <view class="weui-cell__ft">结束本群的签到活动</view>
+            </view>
+        <view class="weui-cell">
+        <view class="weui-cell__bd">开通问答</view>
+        <view class="weui-cell__ft">
+          <switch checked="{{question==='0'}}" bindchange="changeQA"/>
+        </view>
+        </view>
+      </view>
+    
+  </view>
+</view>

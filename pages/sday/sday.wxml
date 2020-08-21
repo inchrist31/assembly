@@ -1,0 +1,107 @@
+
+<view class='audiosBox'>
+  <view class="audioArea" bindtap="listenerButtonPlay" wx:if="{{!isOpen}}">
+    <view class="play"></view>
+  </view>
+   <view class="audioArea" bindtap="listenerButtonPause" wx:if="{{isOpen}}">
+    <view class="pause"></view>
+  </view>
+  <view class='titleBox'>
+    <view style='justify-content:flex-end;display:flex;flex-direction:row;width:100%;'>
+      <view class='audioTime'>
+      {{starttime}}/{{scriptureTitle.audioLength}}
+      </view>
+    </view>
+    <view >
+    
+      <slider block-size='5' bindchange="slider4change" bindchanging='slider4changing' max="{{duration}}" value="{{currentTime}}"/> 
+    </view>
+   
+  </view>
+</view>
+
+
+<view style='padding-top:20rpx'>
+  <view class="NT ">
+    {{scriptureTitle.NT}}
+  </view>
+  <view class="NT ">
+    {{scriptureTitle.OT}}
+  </view>
+</view>
+
+<view class="bible">
+  <block wx:if="{{loadingFlag}}">
+    <view class="box box-lr box-align-center box-pack-center">
+      <view class='weui-loading'></view>
+      <view class="fs28">正在加载</view>
+    </view>
+  </block>
+  <block wx:else>
+   
+   <view class='tx'>
+    <text style='font-size:40rpx;line-height:60rpx' selectable='true'>{{ntText[0]}}</text>
+    </view>
+    <view style='justify-content:center'>
+      <image style='height:200rpx;' src='/images/avatar/hr.gif' mode=''></image>
+    </view>
+    <view class='tx'>
+    <text style='font-size:40rpx;line-height:60rpx' selectable='true'>{{ntText[1]}}</text>
+    </view>
+  </block>
+</view>
+
+<block wx:if="{{authFlag}}">
+  <view class="button-sp-area">
+    <button class="button-read" bindtap='onRead' open-type='share' id='read'>今日已读</button>
+    <button class="button-listen" bindtap='onListen' open-type='share' id='listen'>今日已听</button>
+  </view>
+  <view class="red-color fs20 tips">*点击[今日已读]或[今日已听]按钮，可记录阅读状态，也可以分享到群里。</view>
+
+
+  <view class="list_title">
+    <view wx:if="{{groupId != ''}}">
+      <open-data type="groupName" open-gid="{{groupId}}" class="pink-color" />
+      <block wx:if="{{rlList.length === 0}}">今日还没有人读或听哦！</block>
+      <block wx:elif="{{rlList.length > 0}}">已读/听人员：</block>
+    </view>
+  </view>
+
+
+  <view class="lists">
+    <block wx:for="{{rlList}}" wx:for-item="item" wx:for-index="idx">
+      <view class="list">
+        <view class='seq fs36'>{{idx+1}}</view>
+        <view class='image'>
+          <image src="{{item.user.avatarUrl}}" style='margin-right: 5px;vertical-align: middle;width:60rpx; height: 60rpx;'></image>
+        </view>
+        <view class='nickName fs36'>
+          <text>{{item.user.realName==""?item.user.nickName:item.user.realName}}</text>
+        </view>
+        <view class="box box-lr box-pack-right flex box-align-center">
+          <view class='fs36' wx:if="{{item.rl==='read'}}">已读</view>
+          <view class='fs36' wx:else>已听</view>
+          <view class='fs36 time box grey-color box-align-center box-pack-center'>{{item.formatTime}}</view>
+        </view>
+      </view>
+
+    </block>
+     <block wx:for="{{unsignedUsers}}" wx:for-item="item" wx:for-index="idx">
+      <view class="list">
+        <view class='seq fs36'>{{idx+1}}</view>
+        <view class='image'>
+          <image src="{{item.avatarUrl}}" style='margin-right: 5px;vertical-align: middle;width:60rpx; height: 60rpx;filter:grayscale(100%)'></image>
+        </view>
+        <view class='nickName fs36 grey-color'>
+          <text>{{item.realName==""?item.nickName:item.realName}}</text>
+        </view>
+        <view class="box box-lr box-pack-right flex box-align-center gray-color">
+          <view class='fs36 grey-color'>未签到</view>
+
+          <view class='fs36 time box grey-color box-align-center box-pack-center'></view>
+        </view>
+      </view>
+    </block>
+
+  </view>
+</block>

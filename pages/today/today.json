@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "i-tabs": "../../vendors/iviewui-dist/tabs/index",
+    "i-tab": "../../vendors/iviewui-dist/tab/index",
+    "navigation": "../../component/navigation/navigation",
+    "i-icon": "../../vendors/iviewui-dist/icon/index",
+    "i-badge": "../../vendors/iviewui-dist/badge/index",
+    "i-notice-bar": "../../vendors/iviewui-dist/notice-bar/index"
+  }
+}

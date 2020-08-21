@@ -1,0 +1,66 @@
+<navigation
+id='Navigation'
+title="读经典"
+>
+</navigation>
+
+<view class='page'>
+  <view class="swiper" style='background-color:#ffff00'>
+    <swiper indicator-dots="true" autoplay="true" circular="false">
+      <block wx:for="{{background}}" wx:for-item="item">
+        <swiper-item>
+          <view bindtap="onCourseList" data-courseid="{{item.article_id}}" data-imgurl="{{item.banner_img}}">
+            <image class="img_banner" src="{{item.banner_img}}" mode="aspectFill"></image>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <view class="columns">
+     <view class='columns_name' wx:if="{{myBooks.length>0}}">我的读书</view>
+    <block wx:for="{{myBooks}}" wx:for-item="item">
+      <view class='rows'>
+        <block wx:for="{{item.ag_row}}" wx:for-item="row">
+          <view class='itm' bindtap="onReadingGroup" data-curgroup="{{row}}">
+            <view class='itm_img' style="background-image:url('{{row.book.img}}');background-size:cover;">
+           <view class="mgr_setup" style="">
+              <view class="rank" catchtap="rankingList" data-curgroup="{{row}}"><text>排行榜</text></view>
+               <i-icon wx:if="{{row.manager==curUser.openId}}" type="setup" size="28" color="white" style="" catchtap="onGroupSetup" data-curgroup="{{row}}"/>
+           </view>
+           <view style="width:100%;display:flex;justify-content:center;">
+               <open-data class="group_name" type="groupName" open-gid="{{row._id}}" />
+               </view>
+            
+            </view>
+
+            <view class='itm_title'>{{row.book.name}}</view>
+            <text class='itm_desc'>{{row.desc}}</text>
+          </view>
+        </block>
+
+      </view>
+    </block>
+
+  </view>
+
+  <block wx:for="{{content}}" wx:for-item="item">
+    <view class="columns">
+      <view class='columns_name'>{{item.cats.name}}</view>
+      <block wx:for="{{item.ag}}" wx:for-item="rows">
+        <view class='rows'>
+          <block wx:for="{{rows.ag_row}}" wx:for-item="row">
+            <view class='itm' bindtap="onArticleGroup" data-book="{{row}}" data-catid="{{item.cats._id}}" data-cattype="{{item.cats.type}}">
+              <image class='itm_img' src="{{row.img}}" mode="aspectFill"></image>
+              <view class='itm_title'>{{row.name}}</view>
+              <text class='itm_desc'>{{row.desc}}</text>
+            </view>
+          </block>
+
+        </view>
+      </block>
+
+    </view>
+  </block>
+
+</view>

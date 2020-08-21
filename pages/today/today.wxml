@@ -1,0 +1,95 @@
+<navigation id='Navigation' show-home-icon='{{showHomeIcon}}' show-back-icon='{{showBacKIcon}}' title="{{navigationTitle}}">
+</navigation>
+
+<import src="../../template/articleContent/articleContent.wxml" />
+
+<view style="width:100%;position:fixed">
+  <i-tabs current="{{ currentTab }}" color="#4A6141" bindchange="handleTabChange">
+    <i-tab key="article" title="文章"></i-tab>
+    <i-tab key="companion" title="同伴"></i-tab>
+  </i-tabs>
+</view>
+
+<block wx:if="{{currentTab==='article'}}">
+  <view class="box box-lr box-align-center box-pack-center" wx:if="{{loadingFlag}}" style="margin-top:100rpx;">
+    <view class='weui-loading'></view>
+    <view class="fs28">正在加载</view>
+  </view>
+  <view style="margin-bottom:120rpx;padding-top:70rpx;" wx:else>
+    <i-notice-bar icon="systemprompt" closable loop speed='3000' wx:if="{{noticeContent}}">
+    {{noticeContent}}
+</i-notice-bar>
+    <template is="articleContent" data="{{...articleData,wxParseData:wxParseData.nodes}}" />
+  </view>
+
+  <block wx:if="{{isToday===0||isToday===1}}">
+    <view style="width:100%;height:44px;position:fixed;bottom:0;background-color:#4A6141;display:flex;flex-direction:row">
+
+      <block wx:if="{{isToday===0}}">
+        <view style="width:20%;background-color:#f8f8f9;display:flex;position:relative;">
+          <view style=" width:100%; height:100%; display:flex;align-items:center;justify-content:center;flex-direction:column;border-right: 1px solid #dddee1;">
+          <button plain="true" open-type="share">
+            <image src="/images/icon/share.png"></image>
+          </button>
+            <text style='font-size:20rpx;color:#4A6141'>分享</text>
+          </view>
+        </view>
+
+        <view style="width:20%;background-color:#f8f8f9;display:flex;position:relative;" bindtap="unReadArticles">
+          <view style=" width:100%; height:100%; display:flex;align-items:center;justify-content:center;flex-direction:column">
+            <i-icon type="barrage" size="28" color="#4A6141" />
+            <text style='font-size:20rpx;color:#4A6141'>历史</text>
+          </view>
+          <block wx:if="{{unReadNumber > 0}}">
+            <view class="weui-badge" style="position: absolute;top: -.4em;right: -.4em;">{{unReadNumber}}</view>
+          </block>
+        </view>
+      </block>
+
+      <view style="{{isToday===0?'width:80%':'width:100%'}}" class="enjoy_button" bindtap="onTodayEnjoy">
+        <text>今日已享受</text>
+      </view>
+    </view>
+  </block>
+</block>
+
+<block wx:if="{{currentTab==='companion'}}">
+  <view class="lists" style="padding-top:80rpx;">
+    <block wx:for="{{m1}}" wx:for-item="item" wx:for-index="idx">
+      <view class="list">
+        <view class='seq fs36'>{{idx+1}}</view>
+        <view class='image'>
+          <image src="{{item.user.avatarUrl}}" style='margin-right: 5px;vertical-align: middle;width:60rpx; height: 60rpx;'></image>
+        </view>
+        <view class='nickName fs36'>
+          <text>{{item.user.realName==""?item.user.nickName:item.user.realName}}</text>
+        </view>
+        <view class="box box-lr box-pack-right flex box-align-center">
+          <view class='fs32'>{{item.record}}</view>
+        </view>
+      </view>
+
+    </block>
+    <block wx:for="{{m2}}" wx:for-item="item" wx:for-index="idx">
+      <view class="list">
+        <view class='seq fs36'>{{idx+1}}</view>
+        <view class='image'>
+          <image src="{{item.avatarUrl}}" style='margin-right: 5px;vertical-align: middle;width:60rpx; height: 60rpx;filter:grayscale(100%)'></image>
+        </view>
+        <view class='nickName fs36 grey-color'>
+          <text>{{item.realName==""?item.nickName:item.realName}}</text>
+        </view>
+        <view class="box box-lr box-pack-right flex box-align-center gray-color">
+          <view class='fs36 grey-color'>未签到</view>
+
+          <view class='fs36 time box grey-color box-align-center box-pack-center'></view>
+        </view>
+      </view>
+    </block>
+
+  </view>
+</block>
+
+<view class="round-click" wx:if="{{qaFlag==='0'}}">
+   <navigator url="/pages/questions/questions?articleId={{curArticle._id}}">问答</navigator >
+</view>

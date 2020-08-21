@@ -1,0 +1,5 @@
+{
+  "usingComponents": {"navigation": "../../component/navigation/navigation",
+  "i-input-number": "../../vendors/iviewui-dist/input-number/index"
+  }
+}

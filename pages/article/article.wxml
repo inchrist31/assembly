@@ -1,0 +1,66 @@
+<navigation id='Navigation' show-home-icon='{{showHomeIcon}}' title="{{navigationTitle}}">
+</navigation>
+
+<import src="../../template/articleContent/articleContent.wxml" />
+
+    <view class="box box-lr box-align-center box-pack-center" wx:if="{{loadingFlag}}">
+      <view class='weui-loading'></view>
+      <view class="fs28">正在加载</view>
+    </view>
+
+<view style="margin-bottom:120rpx;" wx:else>
+  <template is="articleContent" data="{{...articleData,wxParseData:wxParseData.nodes}}" />
+</view>
+
+<block wx:if="{{startSign}}">
+  <view style="width:100%;height:44px;position:fixed;bottom:0;background-color:#4A6141" bindtap="onStartSign">
+    <view class="fixed-title">发起签到活动</view>
+  </view>
+</block>
+
+<view class='toast-box' hidden='{{!ifSign}}'>
+  <view class='toastbg'></view>
+  <view class='showToast'>
+    <view class='toast-title'>
+      <text>发起签到</text>
+    </view>
+    <view class='toast-main'>
+      <view class='toast-input'>
+        <i-steps current="0" direction="vertical">
+          <i-step>
+            <view slot="title">
+              步骤1
+            </view>
+            <view slot="content">
+              点下面“分享到群里”，将文章分享到目标群。
+            </view>
+          </i-step>
+          <i-step>
+            <view slot="title">
+              步骤2
+            </view>
+            <view slot="content">
+              进入微信群，打开刚才分享的那篇文章。
+            </view>
+          </i-step>
+          <i-step>
+            <view slot="title">
+              步骤3
+            </view>
+            <view slot="content">
+              根据打开的页面填写签到规则
+            </view>
+          </i-step>
+        </i-steps>
+      </view>
+    </view>
+    <view class='toast-button'>
+      <view class='button1'>
+        <button catchtap='cancelSign'>取消</button>
+      </view>
+      <view class='button2'>
+        <button catchtap='confirmSign' open-type='share'>分享到群里</button>
+      </view>
+    </view>
+  </view>
+</view>

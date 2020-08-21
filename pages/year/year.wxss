@@ -1,0 +1,245 @@
+
+.pinfo {
+  display: flex;
+  flex-direction:row;
+  width: 100%;
+  height: 200rpx;
+}
+.pinfo-avatar {
+  overflow: hidden;
+  width:100rpx;
+  height:100rpx;
+  border-radius: 50%;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}
+.pinfo-detail{
+  display: flex;
+  flex-direction: column;
+  width: 80%
+}
+.pinfo-name {
+  height: 100rpx;
+  font-family: Microsoft YaHei;
+  font-size: 40rpx;
+  color:white;
+  width: 250rpx;
+  white-space: nowrap;
+  padding-left: 20rpx;
+  margin-top:30rpx;
+}
+.pinfo-locality{
+  height: 50rpx;
+  display: flex;
+  flex-direction: row;
+  width: 100%
+}
+.local-church{
+  width:85%;
+  padding-left: 20rpx;
+  color:white;
+  font-size:24rpx;
+  font-weight: bold;
+}
+.edit-icon{
+  width:10%;
+}
+
+.columns{
+  padding-top: 20rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+.itm_img{
+  width: 360rpx;
+  height: 180rpx;
+  border-radius: 5rpx;
+  padding-right: 20rpx;
+}
+.columns_name{
+  font-size: 36rpx;
+/*  font-family: SimHei;*/
+  font-weight:bold;
+}
+.banner{
+  display:flex;
+  flex-direction: column;
+  background-color:bisque; 
+}
+.user{
+  
+   margin: 10rpx 0 20rpx 10px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    width:100%;
+}
+.images{
+  overflow: hidden;
+  width:100rpx;
+  height:100rpx;
+  border-radius: 50%;
+}
+.nickName {
+  font-family: Microsoft YaHei;
+  font-size: 40rpx;
+  color:white;
+  width: 250rpx;
+  white-space: nowrap;
+}
+.statistic{
+  display: flex;
+  flex-direction: row;
+
+}
+.no_statistic{
+  height: 100rpx;
+  width:100%;
+}
+.statistic_item{
+  display: flex;
+  flex-direction:column;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  
+}
+.no {
+  font-size:48rpx;
+  font-family: Microsoft YaHei;
+  color:white;
+  
+  align-items: baseline;
+  justify-content: center;
+ 
+}
+.unit {
+  font-size:24rpx;
+  font-family: Microsoft YaHei;
+  color:white;
+  
+  align-items:center;
+  justify-content: center;
+ 
+}
+.count {
+  display: flex;
+  flex-direction:row;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.calendar-wrap {
+  padding: 0 10rpx;
+  height: 75vh;
+}
+
+.switchView {
+  width: 300rpx;
+  margin-top: 50rpx;
+}
+
+.msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.setting{
+  display: flex;
+  width:50%;
+  height:130rpx;
+  align-items:flex-start;
+  justify-content:flex-end;
+}
+.change{
+  font-size: 28rpx;
+  text-decoration:underline;
+  color:white;
+  
+}
+
+
+.toast-box {
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+ 
+.toastbg {
+    opacity: 0.2;
+    background-color: black;
+    position: absolute;
+    width: 100%;
+    min-height: 100vh;
+}
+ 
+.showToast {
+    position: absolute;
+    opacity: 1;
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 40%;
+}
+ 
+.toast-title {
+    padding-left: 5%;
+    background-color: #4A6141;
+    color: white;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    border-top-right-radius: 16rpx;
+    border-top-left-radius: 16rpx;
+}
+ 
+.toast-main {
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    background-color: white;
+    text-align: center;
+}
+ 
+.toast-input {
+    margin-left: 5%;
+    margin-right: 5%;
+    border: 1px solid #ddd;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+ 
+.toast-button {
+    display: flex;
+}
+ 
+.button1 {
+    width: 50%;
+}
+ 
+.button2 {
+    width: 50%;
+}
+ 
+.button1 button {
+    width: 100%;
+    background-color: white;
+    color: red;
+    border-radius: 0px;
+    border-bottom-left-radius: 16rpx;
+}
+ 
+.button2 button{
+    width: 100%;
+    background-color: white;
+    color: black;
+    border-radius: 0px;
+    border-bottom-right-radius: 16rpx;
+}
+ 
+.picker {
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}

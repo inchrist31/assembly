@@ -1,0 +1,30 @@
+<view class="page">
+  <view class="page__bd">
+  
+    <view class="weui-cells__title">您可以修改本书的开始日期、推送周期</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">新开始日期</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="date" value="{{startDate}}" start="2017-01-01" end="2099-12-01" bindchange="bindStartDateChange">
+            <view class="weui-input">{{startDate}}</view>
+          </picker>
+        </view>
+       
+    </view>
+    <view class="weui-cell weui-cell_input weui-cell_vcode">
+ <view class="weui-cell__hd">
+          <view class="weui-label">新推送周期</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" value="{{interval}}" maxlength='2' type='number' bindinput='bindIntervalInput' />
+        </view>
+      </view>
+      </view>
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="updateStartDate">确定</button>
+    </view>
+  </view>
+</view>

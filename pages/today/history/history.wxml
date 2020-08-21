@@ -1,0 +1,38 @@
+<navigation id='Navigation' show-home-icon='{{showHomeIcon}}' show-back-icon='{{showBacKIcon}}' title="读经典">
+</navigation>
+
+<view class="page">
+  <view class="page__bd">
+  <block wx:if="{{unReadList.length > 0}}">
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd">未读列表</view>
+      <view class="weui-panel__bd">
+        <block wx:for="{{unReadList}}" wx:for-item="item">
+          <view class="weui-media-box weui-media-box_text" bindtap="bindArticle" data-articleid="{{item.articleId}}" data-readflag="1">
+             <view class="weui-media-box__title weui-media-box__title_in-text">{{item.date}}</view>
+            <view class="weui-media-box__desc">{{item.title}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </block>
+
+
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd">已读列表</view>
+      <view class="weui-panel__bd">
+        <block wx:for="{{readList}}" wx:for-item="item">
+          <view class="weui-media-box weui-media-box_text" bindtap="bindArticle" data-articleid="{{item.articleId}}" data-readflag="2">
+            <view class="weui-media-box__title weui-media-box__title_in-text" style="display:flex"><text style="width:50%;">{{item.date}}</text>  <text style="width:50%;text-align:right;font-size:26rpx;color:F8F8F8">{{item.rdate}}</text></view>
+            <view class="weui-media-box__desc">{{item.title}}</view>
+          </view>
+        </block>
+      </view>
+      <block wx:if="{{readList.length === 0}}">
+      <view class="weui-loadmore weui-loadmore_line">
+            <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
+        </view>
+      </block>  
+    </view>
+  </view>
+</view>

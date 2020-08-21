@@ -1,0 +1,55 @@
+<navigation
+id='Navigation'
+title="成员管理"
+>
+</navigation>
+<view class="page">
+  <view class="page__hd">
+    <view class="page__title">群成员管理</view>
+    <view class="page__desc">您可以删除已经退群的成员,也可以给群成员改名字。</view>
+  </view>
+  <view class="page__bd">
+    <view class="weui-cells__title"></view>
+    <view class="weui-cells weui-cells_after-title">
+      <block wx:for="{{memberlist}}" wx:for-item="item" wx:for-index="idx">
+      <view class="list">
+        <view style='' class='seq fs36'>{{idx+1}}</view>
+        <view class='image'>
+          <image src="{{item.avatarUrl}}" style='margin-right: 5px;vertical-align: middle;width:60rpx; height: 60rpx;filter:grayscale(100%)'></image>
+        </view>
+        <view class='nickName fs36'>
+          <text>{{item.realName==""?item.nickName:item.realName}}</text>
+        </view>
+        <view class="box box-lr box-pack-right flex box-align-center gray-color">
+        <view class='fs24 grey-color box-align-center box-pack-center' ></view>
+          <view class='fs36 grey-color box-align-center box-pack-center' style='text-decoration:underline;' bindtap="onChangeName" data-openid="{{item._id}}" data-index="{{idx}}">改名</view>
+
+          <view class='fs36 time box grey-color box-align-center box-pack-center' style='text-decoration:underline;' bindtap="onDeleteMember" data-name='{{item.realName==""?item.nickName:item.realName}}' data-openId='{{item._id}}'>删除</view>
+        </view>
+      </view>
+    </block>
+    </view>
+  </view>
+</view>
+
+<view class='toast-box' hidden='{{!ifCN}}'>
+  <view class='toastbg'></view>
+  <view class='showToast'>
+    <view class='toast-title'>
+      <text>修改姓名</text>
+    </view>
+    <view class='toast-main'>
+      <view class='toast-input'>
+        <input placeholder='请输入姓名' bindinput='setValue' data-name='stuEidtName' value='{{memberlist[indexCN].realName==""?memberlist[indexCN].nickName:memberlist[indexCN].realName}}'></input>
+      </view>
+    </view>
+    <view class='toast-button'>
+      <view class='button1'>
+        <button catchtap='cancel'>取消</button>
+      </view>
+      <view class='button2'>
+        <button catchtap='confirm'>确定</button>
+      </view>
+    </view>
+  </view>
+</view>

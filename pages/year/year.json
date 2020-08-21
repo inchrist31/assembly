@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "navigation": "../../component/navigation/navigation",
+    "calendar": "plugin://calendar/calendar",
+    "i-card": "../../vendors/iviewui-dist/card/index",
+    "i-icon": "../../vendors/iviewui-dist/icon/index",
+    "i-button": "../../vendors/iviewui-dist/button/index"
+  }
+}

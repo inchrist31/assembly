@@ -1,0 +1,50 @@
+<view class="container" wx:if="{{networkError}}">
+  <view>网络连接异常，请检查网络！</view>
+</view>
+
+<view class="container" wx:if="{{serverError}}">
+  <view>服务器连接失败！</view>
+</view>
+
+<view class="container" wx:else>
+  <view class='password' wx:if="{{pwd}}">
+    <view class="motto">对上暗号，即可进入 </view>
+    <view style='border:1px solid #EA5A3C'>
+      <input type='text' bindinput="bindKeyInput" maxlength='10' placeholder='山重水复疑无路~~' />
+    </view>
+    <view style="padding-top:20rpx;">
+      <button class="journey" bindtap="onCheckPWD">提交</button>
+    </view>
+  </view>
+
+  <block wx:if="{{startButton}}">
+    <view class="journey-container">
+      <button class=" journey " open-type='getUserInfo' bindgetuserinfo='onGotUserInfo'>开启阅读之旅</button>
+    </view>
+  </block>
+</view>
+
+<view class='toast-box' hidden='{{!ifAskJoin}}'>
+  <view class='toastbg'></view>
+  <view class='showToast'>
+    <view class='toast-title'>
+      <text>邀请您加入 {{shareInfo.book.name}} 读书活动</text>
+    </view>
+    <view class='toast-main'>
+      <view class='toast-input'>
+        <text>书名:{{shareInfo.book.name}}</text>
+        <text>开始日期:{{shareGroupInfo.startDate}}</text>
+        <text>结束日期:{{shareGroupInfo.endDate}}</text>
+        <text>签到规则:{{shareGroupInfo.rule}}</text>
+      </view>
+    </view>
+    <view class='toast-button'>
+      <view class='button1'>
+        <button catchtap='cancelJoin'>我不加入</button>
+      </view>
+      <view class='button2'>
+        <button catchtap='confirmJoin'>我要加入</button>
+      </view>
+    </view>
+  </view>
+</view>

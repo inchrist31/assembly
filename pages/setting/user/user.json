@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "navigation": "../../component/navigation/navigation",
+    "i-input": "../../vendors/iviewui-dist/input/index",
+    "i-index": "../../vendors/iviewui-dist/index/index",
+    "i-index-item": "../../vendors/iviewui-dist/index-item/index",
+    "i-cell-group": "../../vendors/iviewui-dist/cell-group/index",
+    "i-cell": "../../vendors/iviewui-dist/cell/index"
+  }
+}

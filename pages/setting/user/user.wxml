@@ -1,0 +1,65 @@
+<navigation
+id='Navigation'
+title="设置归属地"
+>
+</navigation>
+
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">姓名:</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" placeholder="请输入您的姓名" bindinput="bindNameInput" value="{{realName}}"/>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">国家/地区:</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindCountryChange" value="{{countryIndex}}" range="{{countries}}">
+            <view class="weui-select weui-select_in-select-after">{{countries[countryIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">省份:</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindProvinceChange" value="{{provinceIndex}}" range="{{provinces}}">
+            <view class="weui-select weui-select_in-select-after">{{provinces[provinceIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">城镇:</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindLocalChurchChange" value="{{localChurchIndex}}" range="{{localChurches}}">
+            <view class="weui-select weui-select_in-select-after">{{localChurches[localChurchIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_select">
+        <view class="weui-cell__hd weui-cell__hd_in-select-after">
+          <view class="weui-label">区:</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker bindchange="bindDistrictChange" value="{{districtIndex}}" range="{{districts}}">
+            <view class="weui-select weui-select_in-select-after">{{districts[districtIndex]}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="bindUpdateLocality">确定</button>
+    </view>
+  </view>
+</view>

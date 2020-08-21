@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "navigation": "../../component/navigation/navigation",
+    "i-steps": "../../vendors/iviewui-dist/steps/index",
+    "i-step": "../../vendors/iviewui-dist/step/index",
+    "i-icon": "../../vendors/iviewui-dist/icon/index"
+    }
+}

@@ -1,0 +1,10 @@
+<navigation
+id='Navigation'
+title="通知"
+>
+</navigation>
+<view class="page">
+  <view class='tx'>
+    <text>{{message}}</text>
+  </view>
+</view>

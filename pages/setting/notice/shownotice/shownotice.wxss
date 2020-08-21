@@ -1,0 +1,8 @@
+.tx {
+  font-size:40rpx;
+  line-height:60rpx;
+  background-color: #FFFFFF;
+  border-radius: 10rpx;
+  margin: 20rpx;
+  word-break: break-all;
+}

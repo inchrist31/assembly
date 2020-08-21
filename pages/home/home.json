@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "navigation": "../../component/navigation/navigation",
+    "i-icon": "../../vendors/iviewui-dist/icon/index"
+  }
+}

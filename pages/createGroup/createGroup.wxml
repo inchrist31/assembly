@@ -1,0 +1,87 @@
+<navigation id='Navigation' title='签到规则设置'>
+</navigation>
+
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-toptips weui-toptips_warn" style="padding-top:{{topTipsPadding}}px"  wx:if="{{showTopTips}}">
+    <text>{{errMsg}}</text>
+      </view>
+    <view class="weui-cells__title"></view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">群组名:</view>
+        <view class="weui-cell__ft">
+          <open-data type="groupName" open-gid="{{groupId}}" />
+        </view>
+      </view>
+    </view>
+    <view class="weui-cells__title"></view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">书名:</view>
+        <view class="weui-cell__ft">
+          {{shareInfo.book.name}}
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title"></view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">开始日期:</view>
+        </view>
+        <view class="weui-cell__bd">
+          <picker mode="date" value="{{startDate}}" start="2015-09-01" end="2099-12-31" bindchange="bindDateChange">
+            <view class="weui-input">{{startDate}}</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells__title"></view>
+    <view class="weui-cells weui-cells_after-title">
+<view class="weui-cell">
+        <view class="weui-cell__bd">进度设置:</view>
+        <view class="weui-cell__ft">
+          
+        </view>
+      </view>
+     
+        <radio-group class="radio-group" bindchange="radioChange" style="">
+          <block wx:for="{{radioInterval}}" wx:key="value">
+            <view style="display:flex;flex-direction:row;padding-left:40rpx;">
+              <radio class="radio" value="{{item.value}}" checked="{{item.checked}}" style="width:50%">
+                <text>{{item.name}}</text>
+              </radio>
+              <view class="radio_detail">
+                <block wx:if="{{item.nflag}}">
+                  <i-panel title="基础用法" style="width:60%">
+                    <view style="">
+                      <i-input-number value="{{ inputNumber[item.value] }}" min="0" max="100" bindchange="handleNoChange" data-nindex="{{item.value}}" />
+                    </view>
+                  </i-panel>
+                </block>
+                <view style="width:40%">
+                  {{item.desc}}
+                </view>
+              </view>
+            </view>
+          </block>
+        </radio-group>
+    
+    </view>
+   <view class="weui-cells__title"></view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="请输入签到规则" style="height: 3.3em" bindinput="bindRuleInput" maxlength="200"/>
+          <view class="weui-textarea-counter">{{letterNo}}/200</view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="submitNewGroup">确定</button>
+    </view>
+  </view>
+</view>

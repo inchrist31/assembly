@@ -1,0 +1,7 @@
+@import '../../index/index.wxss';
+.opt_area{
+  width:100rpx;
+}
+.bg_yellow{
+  background-color: yellow;
+}

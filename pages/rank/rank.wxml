@@ -1,0 +1,25 @@
+<navigation
+id='Navigation'
+title="排行榜"
+>
+</navigation>
+
+  <view class="lists" >
+    <block wx:for="{{ranklist}}" wx:for-item="item" wx:for-index="idx">
+      <view class="list">
+        <view style='' class='seq fs36'>{{idx+1}}</view>
+        <view class='image'>
+          <image src="{{item.userInfo.avatarUrl}}" style='margin-right: 5px;vertical-align: middle;width:60rpx; height: 60rpx;'></image>
+        </view>
+        <view class='nickName fs36'>
+          <text>{{item.userInfo.realName==""?item.userInfo.nickName:item.userInfo.realName}}</text>
+        </view>
+        <view class="box box-lr box-pack-right flex box-align-center">
+          <view class='fs36'>累计</view>
+          <view class='fs36 time box grey-color box-align-center box-pack-center'>{{item.count}}次</view>
+        </view>
+      </view>
+
+    </block>
+
+  </view>

@@ -1,0 +1,154 @@
+<navigation id='Navigation' show-home-icon='{{showHomeIcon}}' show-back-icon='{{showBacKIcon}}' title="问答">
+</navigation>
+
+<view style="width:100%;position:fixed">
+  <i-tabs current="{{ currentTab }}" color="#4A6141" bindchange="handleTabChange">
+    <i-tab key="question" title="真理问答"></i-tab>
+    <i-tab key="saint" title="同伴提问"></i-tab>
+  </i-tabs>
+</view>
+
+<block wx:if="{{currentTab==='question'}}">
+
+  <view class="bible">
+    <view class='tx'>
+      <text selectable='true' style="word-break:break-all">
+      {{truthQuestion.question?truthQuestion.question:"暂无问题"}}
+     </text>
+    </view>
+  </view>
+
+  <view class="button-sp-area" style="display:flex;width:100%;justify-content:flex-end">
+    <view wx:if="{{isMgr}}">
+      <button class="weui-btn mini-btn" type="default" size="mini" bindtap="editQuestion">编辑问题</button>
+    </view>
+    <view wx:if="{{truthQuestion.question && showAnswerBtn}}">
+      <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="answerQuestion">我要答题</button>
+    </view>
+  </view>
+
+  <block wx:for="{{answerlist}}" wx:for-item="item" wx:for-index="idx">
+    <view class="comment-item">
+      <view class="comment-item-header" style="background-color:">
+
+        <view class="left-img">
+          <image src="{{item.user.avatarUrl}}"></image>
+        </view>
+        <view class="right-user">
+          <text class="user-name">{{item.user.realName==""?item.user.nickName:item.user.realName}}</text>
+        </view>
+        <view style="width:300rpx;display:flex;justify-content:flex-end" wx:if="{{isMgr||userInfo.openId===item.user._id}}" bindtap="deleteTruthAnswer" data-answerid="{{item._id}}" data-questionid="{{truthQuestion._id}}">
+          <text style="font-size:26rpx;color:blue;text-decoration:underline">删除</text>
+        </view>
+      </view>
+      <view class="comment-body">
+        <view class="comment-txt" wx:if="{{item.answer&&item.answer!=''}}">
+          <text>{{item.answer}}</text>
+        </view>
+        <view class="comment-voice" wx:if="{{item.audioUrl.url&&item.audioUrl.url!=''}}">
+          <view data-url="{{item.audioUrl.url}}" class="comment-voice-item" catchtap="playAudio">
+            <image src="/images/icon/wx_app_voice.png" class="voice-play"></image>
+            <text>{{item.audioUrl.timeLen}}''</text>
+          </view>
+        </view>
+        <view class="comment-img" wx:if="{{item.content.img.length!=0}}">
+          <block wx:for="{{item.content.img}}" wx:for-item="img" wx:for-index="imgIdx">
+            <image src="{{img}}" mode="aspectFill" catchtap="previewImg" data-comment-idx="{{idx}}" data-img-idx="{{imgIdx}}"></image>
+          </block>
+        </view>
+      </view>
+      <view class="comment-time">{{item.time}}</view>
+    </view>
+  </block>
+
+  <view class="input-box" style="height:{{inputBoxHeight}}" wx:if="{{showInputBox}}">
+    <block wx:if="{{useKeyboardFlag}}">
+      <view style="display:flex;width:100%;justify-content:center">
+        <textarea class="textarea" value="{{inputText}}" bindinput="bindCommentInput" maxlength="600" placeholder="说点什么吧……" />
+      </view>
+      <view style="display:flex;width:100%;justify-content:center;padding-top:20rpx;">
+        <view style="width:15%;display:flex;justify-content:center;align-items:center;flex-direction:column" bindtap="switchInputType">
+          <i-icon type="translation" size="28" color="#80848f" />
+          <text style="font-size:20rpx">语音</text>
+        </view>
+        <view class='submit-btn' bindtap="{{submitTruthAnswerFunc}}">
+          <text class="btn_text" style="color:white" >提交</text>
+        </view>
+      </view>
+    </block>
+    <block wx:if='{{!useKeyboardFlag}}'>
+      <view style="display:flex;width:100%;height:100rpx;align-items:center;border-bottom:1px solid #4A6141;" wx:if="{{tempRecord}}">
+        <view class="comment-voice" style="padding-left:100rpx;">
+          <view data-url="{{tempRecord.audioUrl}}" class="comment-voice-item" catchtap="playAudio">
+            <image src="/images/icon/wx_app_voice.png" class="voice-play"></image>
+            <text>{{tempRecord.duration}}''</text>
+            <icon type="cancel" size="20" color="red" catchtap="deleteTempRecord" data-idx="{{idx}}" style="position:absolute;left:280rpx;top:0rpx;" />
+          </view>
+        </view>
+
+      </view>
+      <view style="display:flex;width:100%;justify-content:center;padding-top:20rpx;">
+        <view style="width:15%;display:flex;justify-content:center;align-items:center;flex-direction:column" bindtap="switchInputType">
+          <i-icon type="keyboard" size="32" color="#80848f" />
+          <text style="font-size:20rpx">文字</text>
+        </view>
+        <view class='submit-btn' style="background-color:white;{{startRecordFlag?'border: 1px solid red;':'border: 1px solid #4A6141;'}}" bindtap="bindRecord" wx:if="{{!tempRecord}}">
+          <text class="btn_text" wx:if="{{!startRecordFlag}}">按下开始录音(最长600s)</text>
+          <text class="btn_text" style="color:red" wx:if="{{startRecordFlag}}">正在录音(按下停止)...{{recordSec}}'' </text>
+
+        </view>
+        <view class='submit-btn' wx:if="{{tempRecord}}" bindtap="{{submitTruthAnswerFunc}}" >
+          <text class="btn_text" style="color:white" >提交</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+
+
+</block>
+
+<block wx:if="{{currentTab==='saint'}}">
+  <view style="padding-top:100rpx"></view>
+  <view class="button-sp-area" style="display:flex;width:100%;justify-content:flex-end;">
+    <view wx:if="{{showAskButton}}" style="padding-right:20rpx">
+      <button class="weui-btn mini-btn" type="primary" size="mini" bindtap="askQuestion">我要提问</button>
+    </view>
+  </view>
+  <block wx:for="{{questionlist}}" wx:for-item="item" wx:for-index="idx">
+    <view class="comment-item">
+      <view class="comment-item-header" style="background-color:">
+
+        <view class="left-img">
+          <image src="{{item.user.avatarUrl}}"></image>
+        </view>
+        <view class="right-user">
+          <text class="user-name">{{item.user.realName==""?item.user.nickName:item.user.realName}}</text>
+        </view>
+        <view style="width:300rpx;display:flex;justify-content:flex-end" wx:if="{{isMgr||userInfo.openId===item.user._id}}" bindtap="deleteSaintQuestion" data-questionid="{{item._id}}">
+          <text style="font-size:26rpx;color:blue;text-decoration:underline">删除</text>
+        </view>
+      </view>
+      <view class="comment-body">
+        <view class="comment-txt">
+          <text>{{item.question}}</text>
+        </view>
+        <block wx:for="{{item.answers}}" wx:for-item="ans" wx:key="{{ans._id}}">
+          <view style="margin-left:30rpx;line-height: 60rpx;border-bottom: 1px solid #dddee1;">
+            
+              <text style="font-weight: 500;word-break:break-all">{{ans.user.realName==""?ans.user.nickName:ans.user.realName}}：{{ans.answer}}</text>
+          
+          </view>
+        </block>
+      </view>
+      <view style="display:flex;flex-direction:row">
+        <view style="display:flex;justify-content:space-between;width:100%;">
+          <view class="comment-time" style="font-size:28rpx">{{item.timestamp}}</view>
+          <view style="padding-left:50rpx" bindtap="replySaintQuestion" data-questionid="{{item._id}}">
+            <i-icon type="message" size="24" color="#80848f" />
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</block>

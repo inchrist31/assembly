@@ -1,0 +1,58 @@
+<navigation
+id='Navigation'
+title="发送通知"
+>
+</navigation>
+<view class="page">
+
+
+  <view class="page__bd">
+
+    <block wx:if="{{curGroup.manager}}">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+         <textarea class="weui-textarea" placeholder="请输入您要发送的通知" bindinput="bindKeyInputArea" maxlength="600" style="height: 9.9em" disabled='{{sendFlag}}' /> 
+          <view class="weui-textarea-counter">{{count}}/600</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-btn-area">
+      <block wx:if="{{!sendFlag}}">
+        <button class="weui-btn" type="primary" bindtap="sendMsg" disabled='{{!hasContent}}'>发送通知</button>
+      </block>
+      <block wx:else>
+        <button class="weui-btn" type="primary" disabled="{{true}}">已发送</button>
+      </block>
+
+    </view>
+
+    </block>
+
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__hd">全部通知</view>
+      <view class="weui-panel__bd">
+        <block wx:for="{{noticelist}}" wx:for-item="item" wx:for-index="idx">
+          <view class="weui-media-box weui-media-box_text {{item.status=='0'?'bg_yellow':''}}">
+            <view class="weui-media-box__title weui-media-box__title_in-text box box-lr">
+              <view>{{item.timestamp}}</view>
+
+              <view class="box box-lr box-pack-right flex box-align-center gray-color">
+                <view wx:if='{{item.status=="0"}}' class='fs36 grey-color box-align-center box-pack-center' style='text-decoration:underline;' bindtap="cancelNotice">取消通知</view>
+                <view wx:if='{{item.status=="1"}}' class='fs36 grey-color box-align-center box-pack-center' style='text-decoration:underline;' bindtap="deleteNotice" data-idx="{{idx}}" data-id="{{item._id}}">删除</view>
+
+
+                <view class='fs36 time box grey-color box-align-center box-pack-center' style='text-decoration:underline;' bindtap="showDetail" data-content='{{item.content}}'>详细</view>
+              </view>
+
+            </view>
+
+            <view class="weui-media-box__desc ">{{item.content}}</view>
+          </view>
+        </block>
+      </view>
+
+    </view>
+  </view>
+</view>
