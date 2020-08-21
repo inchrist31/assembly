@@ -1,0 +1,59 @@
+{
+  "pages": [
+    "pages/welcome/welcome",
+    "pages/year/year",
+    "pages/setting/setting",
+    "pages/setting/groups/groups",
+    "pages/setting/members/members",
+    "pages/setting/notice/shownotice/shownotice",
+    "pages/setting/user/user",
+    "pages/home/home",
+    "pages/today/today",
+    "pages/today/history/history",
+    "pages/article/article",
+    "pages/book/book",
+    "pages/createGroup/createGroup",
+    "pages/rank/rank",
+    "pages/questions/questions",
+    "pages/questions/input/input"
+  ],
+  "requiredBackgroundModes": [
+    "audio"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#4A6141",
+    "navigationBarTitleText": "Reading Classic",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#4A6141",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "borderStyle": "white",
+    "selectedColor": "#4A6141",
+    "color": "#333",
+    "backgroundColor": "#fff",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "images/icon/wx_app_news.png",
+        "selectedIconPath": "images/icon/wx_app_news@HL.png"
+      },
+      {
+        "pagePath": "pages/year/year",
+        "text": "全年",
+        "iconPath": "images/icon/wx_app_movie.png",
+        "selectedIconPath": "images/icon/wx_app_movie@HL.png"
+      }
+    ]
+  },
+  "plugins": {
+    "calendar": {
+      "version": "1.1.3",
+      "provider": "wx92c68dae5a8bb046"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}
