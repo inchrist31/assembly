@@ -1,0 +1,167 @@
+<import src="../../wxParse/wxParse.wxml" />
+
+<template name="articleContent">
+
+  <block wx:if="{{article.video.path != '' && article.video.path != null}}">
+
+    <video src="{{article.video.path}}" style="width: 100%;position:fixed;top:{{videoFixedTop}}px;" autoplay="true"></video>
+
+  </block>
+
+
+
+  <block wx:if="{{article.audio.path != '' && article.audio.path != null}}">
+    <view class='audiosBox' wx:if="{{audioFixedMode && article.book.catalogue.type !='3'}}">
+      <view class="audioArea" bindtap="listenerButtonPlay" wx:if="{{!isOpen}}">
+        <view class="play"></view>
+      </view>
+      <view class="audioArea" bindtap="listenerButtonPause" wx:if="{{isOpen}}">
+        <view class="pause"></view>
+      </view>
+      <view class='titleBox'>
+        <view style='justify-content:space-between;display:flex;flex-direction:row;width:100%;'>
+          <view style="font-size:20rpx;color:white;background-color:#4a6141;border-radius:5%;margin-left:30rpx;padding:0 10rpx 0 10rpx" bindtap="changeAudioShowMode">浮 窗 模 式</view>
+          <view class='audioTime'>
+            {{starttime}}/{{audioLength}}
+          </view>
+        </view>
+        <view>
+
+          <slider block-size='5' bindchange="slider4change" bindchanging='slider4changing' max="{{duration}}" value="{{currentTime}}" />
+        </view>
+
+      </view>
+    </view>
+  </block>
+
+  <block wx:if="{{article.audio.path != '' && article.audio.path != null}}">
+    <view class='audiosBox' wx:if="{{audioFollowMode && article.book.catalogue.type ==='3'}}">
+      <view class="audioArea" bindtap="listenerButtonPlay" wx:if="{{!isOpen}}">
+        <view class="play"></view>
+      </view>
+      <view class="audioArea" bindtap="listenerButtonPause" wx:if="{{isOpen}}">
+        <view class="pause"></view>
+      </view>
+      <view class='titleBox'>
+        <view style='justify-content:space-between;display:flex;flex-direction:row;width:100%;'>
+          <view style="font-size:20rpx;color:white;background-color:#4a6141;border-radius:5%;margin-left:30rpx;padding:0 10rpx 0 10rpx" bindtap="changeAudioShowMode">跟 读 模 式</view>
+          <view class='audioTime'>
+            {{starttime}}/{{audioLength}}
+          </view>
+        </view>
+        <view>
+
+          <slider block-size='5' bindchange="slider4change" bindchanging='slider4changing' max="{{duration}}" value="{{currentTime}}" />
+        </view>
+
+      </view>
+    </view>
+
+  </block>
+  <view class="video_title" style="margin-bottom:0rpx;margin-top:{{videoHeight}}px">{{article.title}}</view>
+
+  <block wx:if="{{article.audio.path != '' && article.audio.path != null}}">
+    <view style="height:100rpx;width:300rpx;background-color:#d9d9d9;position:fixed;top:300rpx;right:20rpx;border-radius:15rpx;display:flex;justify-content:center;align-items:center" wx:if="{{!audioFixedMode}}">
+
+      <image style="height:40rpx;width:70rpx;margin-right:20rpx;" src="/images/icon/music_backward.png" bindtap="musicBackward"></image>
+
+      <view class="audioArea" style="height:90rpx;width:90rpx;" bindtap="listenerButtonPlay" wx:if="{{!isOpen}}">
+        <view class="play"></view>
+      </view>
+      <view class="audioArea" style="height:90rpx;width:90rpx;" bindtap="listenerButtonPause" wx:if="{{isOpen}}">
+        <view class="pause"></view>
+      </view>
+
+      <image style="height:40rpx;width:70rpx;margin-left:20rpx;" src="/images/icon/music_forward.png" bindtap="musicForward"></image>
+      <icon type="cancel" size="20" color="black" catchtap="changeAudioShowMode" data-idx="{{idx}}" style="position:absolute;left:280rpx;top:-20rpx;" />
+      <view style="position:absolute;left:40rpx;top:65rpx;font-size:20rpx;width:80rpx;">-10s</view>
+      <view style="position:absolute;left:220rpx;top:65rpx;font-size:20rpx;width:80rpx;">+10s</view>
+    </view>
+  </block>
+  <block wx:if="{{article.audio.path != '' && article.audio.path != null}}">
+    <view style="height:100rpx;width:300rpx;background-color:RGBA(217,217,217,0.5);position:fixed;top:700rpx;right:20rpx;border-radius:15rpx;display:flex;justify-content:space-around;align-items:center;z-index:1111" wx:if="{{!audioFollowMode}}">
+
+      <view bindtap="listenerButtonPlay" wx:if="{{!isOpen}}">
+        <i-icon type="play_fill" size="36" color="#4a6141" />
+      </view>
+      <view bindtap="listenerButtonPause" wx:if="{{isOpen}}">
+        <i-icon type="suspend" size="36" color="#4a6141" />
+      </view>
+
+      <view class="audioArea" bindtap="startRecord" style="height:80rpx;width:80rpx;background:#fff;" wx:if="{{!recordingFlag}}">
+        <i-icon type="translation_fill" size="36" color="#4a6141" />
+      </view>
+      <view class="audioArea" bindtap="finishRecord" style="height:80rpx;width:80rpx;background:#fff;" wx:if="{{recordingFlag}}">
+        <view style="width:40rpx;height:40rpx;background:red"></view>
+      </view>
+      <view bindtap="playRecord" wx:if="{{!recordPlayingFlag}}">
+        <i-icon type="playon" size="36" color="#4a6141" />
+      </view>
+      <view bindtap="finishPlayRecord" wx:if="{{recordPlayingFlag}}">
+        <i-icon type="playon_fill" size="36" color="#4a6141" />
+      </view>
+      <view style="font-size:20rpx;color:white;position:absolute;left:270rpx;top:-20rpx;width:50rpx;background:#4a6141;text-align:center;border-radius:5%;" catchtap="changeAudioShowMode">连读</view>
+
+
+    </view>
+  </block>
+  <view style="display:flex;width:100%;justify-content:flex-end;align-items:center;font-size:13px">
+    <text style="margin-right:20rpx;">阅读</text>
+    <text style="margin-right:20rpx;">{{article.count}}</text>
+  </view>
+  <block wx:if="{{article.text != '' && article.book.catalogue.type !='3'}}">
+    <view class="bible" style="margin-top:0rpx; padding-top: 0rpx;">
+      <view class='tx'>
+        <text selectable='true'>
+      {{article.text}}
+     </text>
+      </view>
+    </view>
+  </block>
+  <block wx:if="{{article.text != '' && article.book.catalogue.type ==='3'}}">
+    <view style="display:flex;justify-content:center;">
+      <scroll-view class="content"  scroll-y="true" scroll-top="{{scrollTop}}" enable-flex="true" style="" scroll-into-view="line{{currentId}}">
+        <view class="lines">
+          <block wx:for="{{passages.lines}}" wx:for-item="passage" wx:for-index="idx1" wx:key="{{idx1}}">
+            <block wx:for="{{passage}}" wx:for-item="item" wx:for-index="idx2" wx:key="{{idx2}}">
+              <text wx:if="{{item.text[1]}}" style="color:green;font-weight:bold;font-size:36rpx;">{{item.text[0]}}:</text>
+              <text id="line{{idx1}}{{idx2}}" class="{{''+idx1+idx2 ===currentId?'highlight':''}}" style="font-size:36rpx;" bindtap="jumpToLine" data-lineindex="{{item.index}}">{{item.text[1]?item.text[1]:item.text[0]}}</text>
+            </block>
+            <text style="margin-top:20rpx">\n</text>
+          </block>
+        </view>
+      </scroll-view>
+    </view>
+  </block>
+
+  <block wx:if="{{article.htmldoc != ''}}">
+    <!--<view class="bible" style="margin-top:0rpx; padding-top: 0rpx;">
+      <template is="wxParse" data="{{wxParseData}}" />
+    </view>-->
+    <view class="wxParse">
+      <template is="wxParse" data="{{wxParseData}}" />
+    </view>
+  </block>
+
+  <block wx:for="{{article.img}}" wx:for-item="item" wx:key="*this">
+    <view style="width:100%">
+      <image style="width:100%" src="{{item}}" mode="widthFix"></image>
+    </view>
+  </block>
+
+  <block wx:if="{{article.book.recommends}}">
+    <view class="video_title">
+      相关推荐
+    </view>
+    <block wx:for="{{article.book.recommends}}" wx:for-item="item" wx:for-index="idx">
+      <navigator class="list" url="/pages/book/book?bookId=item._id&bookname=item.name">
+        <view class='image'>
+          <image src="{{item.img}}" style='margin-right: 5px;vertical-align: middle;width:60rpx; height: 60rpx;'></image>
+        </view>
+        <view class='nickName fs36'>
+          <text>{{item.name}}</text>
+        </view>
+      </navigator>
+    </block>
+  </block>
+</template>
